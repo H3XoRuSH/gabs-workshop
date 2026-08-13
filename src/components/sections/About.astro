@@ -1,0 +1,46 @@
+---
+// About — short, human, specific. Not a bio essay, not corporate.
+import Card from '../Card.astro';
+---
+
+<section id="about" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">About</h2>
+      <span class="tag-chip tag-chip--yellow">the short version</span>
+    </div>
+
+    <div class="about-wrap">
+      <Card accent="yellow" title="Hi, I'm Gab">
+        <p>
+          I write software for a living and for fun — enterprise apps at Azeus by day, an
+          11-game real-time arcade and text-based emergency simulators after hours.
+        </p>
+        <p>
+          BS Computer Science from UP Diliman (Summa Cum Laude, GWA 1.1976). Backend-leaning
+          full-stack: Java, Python, TypeScript, and whatever the current side project demands.
+          The competitive-programming habit started with NOI.PH in high school and kept going
+          on Codeforces and AtCoder.
+        </p>
+        <p>
+          Off the keyboard: table tennis and video games (both, officially, UP "activities"),
+          two dogs named Rowoon and Mokang, and a steady rotation of OPM, pop, and jazz.
+        </p>
+      </Card>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-wrap {
+    max-width: 720px;
+  }
+
+  p {
+    font-size: 0.97rem;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+</style>

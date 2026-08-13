@@ -1,0 +1,75 @@
+---
+// Base layout — fonts, header with always-reachable contact affordance, footer.
+import '@fontsource/archivo-black';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="/#top">Gab's&nbsp;Workshop</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#cp">Comp&nbsp;Programming</a>
+        <a href="#about">About</a>
+        <a class="btn btn--red" href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p class="footer-note">
+          © {year} Rae Gabriel Samonte · Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> ·
+          same card energy as <a href="https://gabs-arcade.xyz" target="_blank" rel="noopener noreferrer">gabs-arcade.xyz</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-footer {
+    margin-top: 3rem;
+    border-top: var(--border);
+    background: var(--bg);
+    padding-block: 1.6rem;
+  }
+
+  .footer-note {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  .footer-note a {
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+</style>

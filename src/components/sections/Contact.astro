@@ -1,0 +1,56 @@
+---
+// Contact — same card treatment; actionable and prominent (CV button +
+// always-reachable header affordance). No contact form for v1.
+import Card from '../Card.astro';
+
+const cvPath = '/CV%20-%20Samonte%2C%20Rae%20Gabriel.pdf';
+---
+
+<section id="contact" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Contact</h2>
+      <span class="tag-chip tag-chip--orange">always open</span>
+    </div>
+
+    <div class="contact-wrap">
+      <Card accent="orange" title="Say hi — or just take the CV">
+        <p class="contact-line">
+          Hiring, collaborating, or want a rematch on the arcade? These are the fastest
+          ways to reach me.
+        </p>
+        <div class="contact-actions">
+          <a class="btn btn--red" href={cvPath} download="Samonte-Rae-Gabriel-CV.pdf">
+            Download Resume / CV ↓
+          </a>
+          <a class="btn" href="mailto:samontegabriel2001@gmail.com">
+            Email ↗
+          </a>
+          <a class="btn" href="https://github.com/H3XoRuSH" target="_blank" rel="noopener noreferrer">
+            GitHub ↗
+          </a>
+          <a class="btn btn--ink" href="https://www.linkedin.com/in/gabsamonte614" target="_blank" rel="noopener noreferrer">
+            LinkedIn ↗
+          </a>
+        </div>
+      </Card>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-wrap {
+    max-width: 720px;
+  }
+
+  .contact-line {
+    font-size: 0.94rem;
+  }
+
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+  }
+</style>

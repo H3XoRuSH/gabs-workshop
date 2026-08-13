@@ -1,0 +1,116 @@
+---
+// Education — Summa Cum Laude + GWA 1.1976 featured, not buried.
+import Card from '../Card.astro';
+---
+
+<section id="education" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Education</h2>
+      <span class="tag-chip tag-chip--green">Summa Cum Laude · GWA 1.1976</span>
+    </div>
+
+    <div class="edu-grid">
+      <Card
+        accent="green"
+        tag="Sep 2020 – Jul 2024"
+        title="BS Computer Science — University of the Philippines Diliman"
+      >
+        <div class="edu-honors">
+          <p class="edu-gwa">1.1976</p>
+          <div>
+            <p class="edu-honor-label">Summa Cum Laude</p>
+            <p class="edu-honor-sub">GWA · on the transcript, framed, and now here</p>
+          </div>
+        </div>
+        <ul class="edu-details">
+          <li><strong>Activities:</strong> Programming, Table Tennis, Video Games</li>
+          <li><strong>Member:</strong> UP Algo++ (competitive programming org) · UP Sarô</li>
+        </ul>
+      </Card>
+
+      <Card
+        accent="yellow"
+        tag="2014 – 2019"
+        title="Philippine Science High School — Bicol Region Campus"
+      >
+        <p class="edu-line">Where the competitive programming habit started.</p>
+      </Card>
+    </div>
+  </div>
+</section>
+
+<style>
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .edu-grid :global(.card-title) {
+    min-height: 2.4em;
+  }
+
+  .edu-honors {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    margin: 0.25rem 0 1rem;
+  }
+
+  .edu-gwa {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 4.25rem);
+    line-height: 1;
+    margin: 0;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.35rem 0.55rem 0.4rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .edu-honor-label {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    margin: 0 0 0.15em;
+  }
+
+  .edu-honor-sub {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  .edu-details {
+    list-style: none;
+    margin: auto 0 0;
+    padding: 1rem 0 0;
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.94rem;
+  }
+
+  .edu-line {
+    font-size: 0.94rem;
+    margin: auto 0 0;
+  }
+
+  @media (max-width: 720px) {
+    .edu-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .edu-honors {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+  }
+</style>

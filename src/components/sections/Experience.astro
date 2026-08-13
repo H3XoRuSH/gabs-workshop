@@ -1,0 +1,98 @@
+---
+// Experience — brief card-based list (role, company, dates, one line).
+// A portfolio, not a CV: no dense resume bullets.
+import Card from '../Card.astro';
+
+type Job = {
+  role: string;
+  company: string;
+  meta: string;
+  where: string;
+  line: string;
+  accent: 'red' | 'orange' | 'yellow' | 'green';
+};
+
+const jobs: Job[] = [
+  {
+    role: 'Software Developer',
+    company: 'Azeus Systems Limited',
+    meta: 'Full-time · Oct 2024 – Present',
+    where: 'NCR, Philippines · Remote',
+    line: 'Enterprise applications with Java, Vue.js, and Python.',
+    accent: 'red',
+  },
+  {
+    role: 'Software Engineer Intern',
+    company: 'Azeus Systems Philippines Limited',
+    meta: 'Internship · Jul – Aug 2023',
+    where: 'NCR, Philippines',
+    line: 'Spring Boot and friends.',
+    accent: 'yellow',
+  },
+  {
+    role: 'Bootcamp Trainer',
+    company: 'StackTrek',
+    meta: 'Part-time · May 2022 – Jun 2023',
+    where: 'Remote',
+    line: 'Instructed and mentored aspiring developers through HTML, CSS, JavaScript, React, and Node.js.',
+    accent: 'green',
+  },
+];
+---
+
+<section id="experience" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Experience</h2>
+      <span class="tag-chip tag-chip--orange">3 stops so far</span>
+    </div>
+    <div class="exp-grid">
+      {
+        jobs.map((job) => (
+          <Card accent={job.accent} tag={job.meta} title={job.role}>
+            <p class="exp-company">{job.company}</p>
+            <p class="exp-line">{job.line}</p>
+            <p class="exp-where">{job.where}</p>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .exp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .exp-grid :global(.card-title) {
+    min-height: 2.3em;
+  }
+
+  .exp-company {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin: 0 0 0.4em;
+  }
+
+  .exp-line {
+    font-size: 0.94rem;
+    margin: 0 0 0.6em;
+  }
+
+  .exp-where {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin: auto 0 0;
+    padding-top: 0.8rem;
+  }
+</style>

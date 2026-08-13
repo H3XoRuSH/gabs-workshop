@@ -1,0 +1,37 @@
+---
+/**
+ * Card — the shared neo-brutalist pattern from gabs-arcade.xyz:
+ * colored top border + thick black border + hard offset shadow.
+ * Reused everywhere: projects, comp-programming, contact.
+ */
+interface Props {
+  accent: 'red' | 'orange' | 'yellow' | 'green';
+  /** optional extra classes for composition */
+  class?: string;
+  /** optional mono meta line (dates, tag) rendered under the top band */
+  tag?: string;
+  /** optional title rendered in display type */
+  title?: string;
+  /** when set, the whole card becomes a link (stretched-link pattern) */
+  href?: string;
+  external?: boolean;
+  ariaLabel?: string;
+}
+
+const { accent = 'red', class: className, tag, title, href, external = false, ariaLabel } = Astro.props;
+const linkAttrs = {
+  target: external ? '_blank' : undefined,
+  rel: external ? 'noopener noreferrer' : undefined,
+};
+---
+
+<article class:list={['card', `accent-${accent}`, className]}>
+  {tag && <p class="card-meta">{tag}</p>}
+  {title && <h3 class="card-title">{title}</h3>}
+  <slot />
+  {
+    href && (
+      <a class="card-stretch" href={href} aria-label={ariaLabel ?? title} {...linkAttrs}></a>
+    )
+  }
+</article>

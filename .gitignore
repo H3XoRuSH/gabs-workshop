@@ -1,0 +1,23 @@
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# environment variables
+.env
+.env.production
+
+# working data — not part of the site (LinkedIn scrape used to write docs/plan.md)
+docs/profile_data_parsed.json
+
+# macOS-specific files
+.DS_Store

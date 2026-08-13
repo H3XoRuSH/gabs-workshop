@@ -1,0 +1,250 @@
+---
+// Projects — 5 featured cards (problem → role → solution) + compact
+// "more builds" strip. Content lives in src/content/projects/*.md.
+import { getCollection } from 'astro:content';
+import Card from '../Card.astro';
+
+const all = await getCollection('projects');
+const featured = all
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+const more = all
+  .filter((p) => !p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id="projects" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Projects</h2>
+      <span class="tag-chip tag-chip--red">5 featured · curated, not archived</span>
+    </div>
+
+    <div class="projects-grid">
+      {
+        featured.map((p) => (
+          <Card accent={p.data.accent} tag={p.data.dates} title={p.data.title}>
+            {p.data.problem && <p><strong>Problem:</strong> {p.data.problem}</p>}
+            {p.data.role && <p><strong>Role:</strong> {p.data.role}</p>}
+            {p.data.solution && <p><strong>Solution:</strong> {p.data.solution}</p>}
+            <div class="project-foot">
+              <ul class="chip-list">
+                {p.data.stack.map((s) => (
+                  <li class="chip">{s}</li>
+                ))}
+              </ul>
+              {(p.data.link || p.data.repo) && (
+                <div class="project-links">
+                  {p.data.link && (
+                    <a class="btn" href={p.data.link} target="_blank" rel="noopener noreferrer">
+                      Live ↗
+                    </a>
+                  )}
+                  {p.data.repo && (
+                    <a class="btn btn--ink" href={p.data.repo} target="_blank" rel="noopener noreferrer">
+                      Repo ↗
+                    </a>
+                  )}
+                </div>
+              )}
+            </div>
+          </Card>
+        ))
+      }
+    </div>
+
+    <aside class="more-builds" aria-label="More builds">
+      <div class="more-head">
+        <h3 class="more-title">More builds</h3>
+        <span class="tag-chip tag-chip--ink">the rest of the shelf</span>
+      </div>
+      <div class="more-grid">
+        {
+          more.map((b) => (
+            <div class:list={['mini-build', `accent-${b.data.accent}`]}>
+              <h4 class="mini-title">{b.data.title}</h4>
+              <p class="mini-blurb">
+                {b.data.blurb || 'No description on the repo yet.'}
+              </p>
+              <div class="mini-foot">
+                <span class="mini-lang">{b.data.stack.join(' · ')}</span>
+                {(b.data.link || b.data.repo) && (
+                  <a
+                    class="mini-link"
+                    href={b.data.link ?? b.data.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {b.data.link ? 'live ↗' : 'repo ↗'}
+                  </a>
+                )}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* the signature project gets the whole top row */
+  .projects-grid > :first-child {
+    grid-column: 1 / -1;
+  }
+
+  /* equal header height per subtype → titles start on the same line */
+  .projects-grid :global(.card-title) {
+    min-height: 2.4em;
+  }
+
+  .projects-grid > :first-child :global(.card-title) {
+    font-size: 1.45rem;
+    min-height: auto;
+  }
+
+  .projects-grid p {
+    font-size: 0.94rem;
+    margin-bottom: 0.85em;
+  }
+
+  /* footer pinned to the card bottom */
+  .project-foot {
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+
+  .chip-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 2px solid var(--ink);
+    background: var(--bg);
+    padding: 0.08rem 0.45rem;
+    border-radius: 2px;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 0.9rem;
+  }
+
+  /* ---------- more builds strip ---------- */
+
+  .more-builds {
+    margin-top: 2.75rem;
+    border: var(--border);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    background: var(--bg);
+    padding: 1.4rem 1.5rem;
+  }
+
+  .more-head {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .more-title {
+    font-size: 1.05rem;
+    margin: 0;
+  }
+
+  .more-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1rem;
+  }
+
+  .mini-build {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--ink);
+    border-top-width: 5px;
+    box-shadow: var(--shadow-sm);
+    border-radius: 2px;
+    padding: 0.8rem 0.95rem;
+    background: var(--bg);
+  }
+
+  .mini-build.accent-red { border-top-color: var(--red); }
+  .mini-build.accent-orange { border-top-color: var(--orange); }
+  .mini-build.accent-yellow { border-top-color: var(--yellow); }
+  .mini-build.accent-green { border-top-color: var(--green); }
+
+  .mini-title {
+    font-size: 0.88rem;
+    margin: 0 0 0.35em;
+    min-height: 2.2em;
+  }
+
+  .mini-blurb {
+    font-size: 0.83rem;
+    line-height: 1.45;
+    margin: 0 0 0.6em;
+    flex: 1 0 auto;
+  }
+
+  .mini-foot {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: auto;
+    padding-top: 0.6rem;
+  }
+
+  .mini-lang {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.65;
+  }
+
+  .mini-link {
+    margin-left: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 1px;
+  }
+
+  .mini-link:hover {
+    opacity: 0.75;
+  }
+
+  @media (max-width: 720px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

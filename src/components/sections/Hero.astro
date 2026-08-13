@@ -1,0 +1,71 @@
+---
+// Hero — mini recreation of the arcade's own card-grid UI, but the tiles
+// are portfolio sections instead of games. Plain anchor scroll-links,
+// zero JS.
+import Card from '../Card.astro';
+
+type Tile = {
+  name: string;
+  sub: string;
+  accent: 'red' | 'orange' | 'yellow' | 'green';
+  href: string;
+};
+
+const tiles: Tile[] = [
+  {
+    name: 'Projects',
+    sub: 'five featured builds',
+    accent: 'red',
+    href: '#projects',
+  },
+  {
+    name: 'Competitive Programming',
+    sub: 'Codeforces · AtCoder · NOI.PH',
+    accent: 'green',
+    href: '#cp',
+  },
+  {
+    name: 'About',
+    sub: 'the human behind the commits',
+    accent: 'yellow',
+    href: '#about',
+  },
+  {
+    name: 'Contact',
+    sub: 'say hi · grab the CV',
+    accent: 'orange',
+    href: '#contact',
+  },
+];
+---
+
+<section class="hero" aria-label="Intro">
+  <div class="container">
+    <p class="hero-kicker tag-chip">Portfolio of Rae Gabriel Samonte</p>
+    <h1 class="hero-title">Gab's <span class="hero-title-accent">Workshop</span></h1>
+    <p class="hero-sub">
+      Full-stack &amp; AI developer. Competitive programmer. Builds multiplayer games for fun.
+    </p>
+    <div class="hero-tiles">
+      {
+        tiles.map((tile) => (
+          <Card
+            class="hero-tile"
+            accent={tile.accent}
+            href={tile.href}
+            title={tile.name}
+            ariaLabel={`Jump to the ${tile.name} section`}
+          >
+            <p class="tile-sub">{tile.sub}</p>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-kicker {
+    margin-bottom: 1.4rem;
+  }
+</style>

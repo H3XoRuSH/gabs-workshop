@@ -1,0 +1,87 @@
+---
+// Certifications — compact strip under Education. Early/foundational:
+// a list, not individual cards.
+type Cert = {
+  name: string;
+  issuer: string;
+  date: string;
+};
+
+const certs: Cert[] = [
+  { name: 'Bootcamp Trainer', issuer: 'StackTrek', date: 'May 2022' },
+  { name: 'Gold Level Programmer', issuer: 'StackLeague', date: 'Nov 2021' },
+  { name: 'Python (Basic)', issuer: 'HackerRank', date: 'Jul 2020' },
+  { name: 'Problem Solving (Basic)', issuer: 'HackerRank', date: 'Jun 2020' },
+];
+---
+
+<section id="certifications" class="section certs">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Certifications</h2>
+      <span class="tag-chip tag-chip--yellow">the early shelf</span>
+    </div>
+    <ul class="cert-list">
+      {
+        certs.map((cert) => (
+          <li class="cert-row">
+            <span class="cert-name">{cert.name}</span>
+            <span class="cert-issuer">{cert.issuer}</span>
+            <span class="cert-date">{cert.date}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .certs {
+    padding-top: 0.5rem;
+  }
+
+  .cert-list {
+    list-style: none;
+    margin: 0;
+    padding: 0.35rem 0;
+    border: var(--border);
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius);
+    background: var(--bg);
+  }
+
+  .cert-row {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    padding: 0.6rem 1.2rem;
+    border-bottom: 2px solid rgba(26, 26, 26, 0.14);
+  }
+
+  .cert-row:last-child {
+    border-bottom: none;
+  }
+
+  .cert-name {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .cert-issuer,
+  .cert-date {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.65;
+  }
+
+  .cert-date {
+    margin-left: auto;
+    opacity: 0.85;
+  }
+</style>
