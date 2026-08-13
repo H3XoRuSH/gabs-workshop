@@ -12,6 +12,9 @@ interface Props {
 
 const { title, description } = Astro.props;
 const year = new Date().getFullYear();
+
+// base with trailing slash: "/" in dev, "/gabs-workshop/" on GitHub Pages
+const base = import.meta.env.BASE_URL === '/' ? '/' : `${import.meta.env.BASE_URL}/`;
 ---
 
 <!doctype html>
@@ -22,11 +25,11 @@ const year = new Date().getFullYear();
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
   </head>
   <body>
     <header class="site-header">
-      <a class="wordmark" href="/#top">Gab's&nbsp;Workshop</a>
+      <a class="wordmark" href={`${base}#top`}>Gab's&nbsp;Workshop</a>
       <nav class="site-nav" aria-label="Primary">
         <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>

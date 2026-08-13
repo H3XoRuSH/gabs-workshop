@@ -3,7 +3,9 @@
 // always-reachable header affordance). No contact form for v1.
 import Card from '../Card.astro';
 
-const cvPath = '/CV%20-%20Samonte%2C%20Rae%20Gabriel.pdf';
+// base with trailing slash: "/" in dev, "/gabs-workshop/" on GitHub Pages
+const base = import.meta.env.BASE_URL === '/' ? '/' : `${import.meta.env.BASE_URL}/`;
+const cvPath = `${base}CV%20-%20Samonte%2C%20Rae%20Gabriel.pdf`;
 ---
 
 <section id="contact" class="section">
